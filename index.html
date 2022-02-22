@@ -586,12 +586,17 @@
                 <input class="form-control" type="text" name="Email" placeholder="Email" id="email">
               </div>
               <div class="col-6 mt-3 wow fadeInUp">
-                <input class="form-control" type="text" name="Subject" placeholder="Assunto" id="about">
+                <input class="form-control" type="text" name="Subject" placeholder="Assunto" id="Subject">
               </div>
               <div class="col-12 mt-3 wow fadeInUp">
                 <textarea class="form-control" name="Message" rows="6" placeholder="Escreva sua mensagem..." id="message"></textarea>
               </div>
-              <button  class="btn btn-theme mt-3 wow fadeInUp ml-1" value="SendContect()">Enviar uma Mensagem</button>
+              <div class="popup">
+              <span class="popuptext" id="myPopupSucess">Obrigado por entrar em contato! retornarei em breve...</span>
+              <span class="popuptext" id="myPopupError">Opa, ocorreu um erro, mande novamente mais tarde ou me contato pelas redes sociais!</span>
+              <span class="popuptext" id="myPopupEmpty">É necessário preencher todos os campos para fazer o envio!</span>
+              <button type="button" onclick="SendContect()" class="btn btn-theme mt-3 wow fadeInUp ml-1" >Enviar uma Mensagem</button>
+            </div>
             </div>
           </form>
         </div>
@@ -627,24 +632,43 @@ function typeWriter() {
   </script>
   <script>
     function SendContect(){
-    const name = document.getElementById('name');
-    const email = document.getElementById('email');
-    const about = document.getElementById('about');
-    const message = document.getElementById('message');
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const about = document.getElementById('Subject').value;
+    const message = document.getElementById('message').value;
+    var popupError = document.getElementById("myPopupError");
+    var popupSucess = document.getElementById("myPopupSucess");
+    var popupEmpty = document.getElementById("myPopupEmpty");
+    console.log(name+","+email+","+about+","+message)
 
-    console.log("deu certo ${name}, ${email}, ${about}, ${message} ")
-    
-    fetch('https://script.google.com/macros/s/AKfycbxevDgbKi0GNP4I3wx6SpnuFoAtJ0CnpNm4JjSSkhorde7joqugsu6KvQW6040EFuPQxA/exec?name=${name}&email=${email}&about=${about}&message=${message}', {
+    if(name === "" || email  === ""  || about  === ""  || message  === "" ){
+      popupEmpty.classList.toggle("show");
+      setTimeout(() => {
+        popupEmpty.classList.remove("show");
+      }, 5000);
+    } else{
+      fetch('https://script.google.com/macros/s/AKfycbxevDgbKi0GNP4I3wx6SpnuFoAtJ0CnpNm4JjSSkhorde7joqugsu6KvQW6040EFuPQxA/exec?name=' + name + "&email=" + email +"&about=" + about +"&message=" + message, {
       method: 'GET',
     })
-      .then(response => response.json())
-      .then(data => {
-          console.log('Success:', data);
-        })
+      .then(response => {
+        response.ok ? popupSucess.classList.toggle("show") : popupError.classList.toggle("show"); setTimeout(() => {
+          popupSucess.classList.remove("show");
+          popupError.classList.remove("show");
+      }, 5000); clearForm();
+      })
     .catch((error) => {
             console.error('Error:', error);
       });
     }
+    }
+    
+    function clearForm() {
+      document.getElementById('name').value = "";
+      document.getElementById('email').value = "";
+      document.getElementById('Subject').value = "";
+      document.getElementById('message').value = "";
+    }
+   
 
   </script>
   
