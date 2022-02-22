@@ -580,18 +580,18 @@
           <form class="vg-contact-form">
             <div class="form-row">
               <div class="col-12 mt-3 wow fadeInUp">
-                <input class="form-control" type="text" name="Name" placeholder="Seu nome">
+                <input class="form-control" type="text" name="Name" placeholder="Seu nome" id="name">
               </div>
               <div class="col-6 mt-3 wow fadeInUp">
-                <input class="form-control" type="text" name="Email" placeholder="Email">
+                <input class="form-control" type="text" name="Email" placeholder="Email" id="email">
               </div>
               <div class="col-6 mt-3 wow fadeInUp">
-                <input class="form-control" type="text" name="Subject" placeholder="Assunto">
+                <input class="form-control" type="text" name="Subject" placeholder="Assunto" id="about">
               </div>
               <div class="col-12 mt-3 wow fadeInUp">
-                <textarea class="form-control" name="Message" rows="6" placeholder="Escreva sua mensagem..."></textarea>
+                <textarea class="form-control" name="Message" rows="6" placeholder="Escreva sua mensagem..." id="message"></textarea>
               </div>
-              <button type="submit" class="btn btn-theme mt-3 wow fadeInUp ml-1">Enviar uma Mensagem</button>
+              <button  class="btn btn-theme mt-3 wow fadeInUp ml-1" value="SendContect()">Enviar uma Mensagem</button>
             </div>
           </form>
         </div>
@@ -623,6 +623,28 @@ function typeWriter() {
     setTimeout(typeWriter, speed);
   }
 }
+
+  </script>
+  <script>
+    function SendContect(){
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const about = document.getElementById('about');
+    const message = document.getElementById('message');
+
+    console.log("deu certo ${name}, ${email}, ${about}, ${message} ")
+    
+    fetch('https://script.google.com/macros/s/AKfycbxevDgbKi0GNP4I3wx6SpnuFoAtJ0CnpNm4JjSSkhorde7joqugsu6KvQW6040EFuPQxA/exec?name=${name}&email=${email}&about=${about}&message=${message}', {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(data => {
+          console.log('Success:', data);
+        })
+    .catch((error) => {
+            console.error('Error:', error);
+      });
+    }
 
   </script>
   
