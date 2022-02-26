@@ -4,15 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  
-  <meta name="copyright" content="MACode ID, https://www.macodeid.com/">
-  
   <title>Guilherme Jahnke Vieira</title>
 
   <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
   
-  <link rel="stylesheet" type="text/css" href="assets/css/themify-icons.css">
   <link rel="stylesheet" type="text/css" href="assets/css/themify-icons.css">
   
   <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
@@ -616,61 +611,6 @@
     </div>
   </div> <!-- End footer -->
   
-  <script>
-var i = 0;
-var txt = 'Lorem ipsum dummy text blabla.';
-var speed = 50;
-
-function typeWriter() {
-  if (i < txt.length) {
-    document.getElementById("demo").innerHTML += txt.charAt(i);
-    i++;
-    setTimeout(typeWriter, speed);
-  }
-}
-
-  </script>
-  <script>
-    function SendContect(){
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const about = document.getElementById('Subject').value;
-    const message = document.getElementById('message').value;
-    var popupError = document.getElementById("myPopupError");
-    var popupSucess = document.getElementById("myPopupSucess");
-    var popupEmpty = document.getElementById("myPopupEmpty");
-    console.log(name+","+email+","+about+","+message)
-
-    if(name === "" || email  === ""  || about  === ""  || message  === "" ){
-      popupEmpty.classList.toggle("show");
-      setTimeout(() => {
-        popupEmpty.classList.remove("show");
-      }, 5000);
-    } else{
-      fetch('https://script.google.com/macros/s/AKfycbxevDgbKi0GNP4I3wx6SpnuFoAtJ0CnpNm4JjSSkhorde7joqugsu6KvQW6040EFuPQxA/exec?name=' + name + "&email=" + email +"&about=" + about +"&message=" + message, {
-      method: 'GET',
-    })
-      .then(response => {
-        response.ok ? popupSucess.classList.toggle("show") : popupError.classList.toggle("show"); setTimeout(() => {
-          popupSucess.classList.remove("show");
-          popupError.classList.remove("show");
-      }, 5000); clearForm();
-      })
-    .catch((error) => {
-            console.error('Error:', error);
-      });
-    }
-    }
-    
-    function clearForm() {
-      document.getElementById('name').value = "";
-      document.getElementById('email').value = "";
-      document.getElementById('Subject').value = "";
-      document.getElementById('message').value = "";
-    }
-   
-
-  </script>
   
   <script src="assets/js/jquery-3.5.1.min.js"></script>
     
@@ -683,24 +623,12 @@ function typeWriter() {
   <script src="assets/vendor/isotope/isotope.pkgd.min.js"></script>
     
   <script src="assets/vendor/nice-select/js/jquery.nice-select.min.js"></script>
-    
-  <script src="assets/vendor/fancybox/js/jquery.fancybox.min.js"></script>
 
   <script src="assets/vendor/wow/wow.min.js"></script>
-
-  <script src="assets/vendor/animateNumber/jquery.animateNumber.min.js"></script>
-
-  <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-
-  <script src="assets/js/google-maps.js"></script>
     
   <script src="assets/js/topbar-virtual.js"></script>
 
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIA_zqjFMsJM_sxP9-6Pde5vVCTyJmUHM&callback=initMap"></script>
-
   <script src="assets/js/main.js"></script>
-
-  <script src="assets/vendor/typed.js/typed.min.js"></script>
   
 </body>
 </html>

@@ -56,3 +56,41 @@
       }
   
   })()
+
+  function SendContect(){
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const about = document.getElementById('Subject').value;
+    const message = document.getElementById('message').value;
+    var popupError = document.getElementById("myPopupError");
+    var popupSucess = document.getElementById("myPopupSucess");
+    var popupEmpty = document.getElementById("myPopupEmpty");
+    console.log(name+","+email+","+about+","+message)
+
+    if(name === "" || email  === ""  || about  === ""  || message  === "" ){
+      popupEmpty.classList.toggle("show");
+      setTimeout(() => {
+        popupEmpty.classList.remove("show");
+      }, 5000);
+    } else{
+      fetch('https://script.google.com/macros/s/AKfycbxevDgbKi0GNP4I3wx6SpnuFoAtJ0CnpNm4JjSSkhorde7joqugsu6KvQW6040EFuPQxA/exec?name=' + name + "&email=" + email +"&about=" + about +"&message=" + message, {
+      method: 'GET',
+    })
+      .then(response => {
+        response.ok ? popupSucess.classList.toggle("show") : popupError.classList.toggle("show"); setTimeout(() => {
+          popupSucess.classList.remove("show");
+          popupError.classList.remove("show");
+      }, 5000); clearForm();
+      })
+    .catch((error) => {
+            console.error('Error:', error);
+      });
+    }
+    }
+    
+    function clearForm() {
+      document.getElementById('name').value = "";
+      document.getElementById('email').value = "";
+      document.getElementById('Subject').value = "";
+      document.getElementById('message').value = "";
+    }
