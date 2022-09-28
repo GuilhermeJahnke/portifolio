@@ -8,7 +8,6 @@
     "use strict";
   
     const carouselText = [
-        {text:" Front-End...",},
         {text: " Mobile...",},
       ]
       
